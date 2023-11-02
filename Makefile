@@ -1,20 +1,23 @@
 # Author: Eduardo Gobbo W.V.G
-# Date 	: 2023/09
+# Date 	: 10/2023
 
-mainProgram='ember'
+parametrosCompilacao=-Wall#-Wshadow 
+nomePrograma=main
 
-CompilerParams=-Wall --std=c++17 
-Compiler=g++
+SRCS = $(wildcard *.cpp MVC/*.cpp)
+OBJS = $(SRCS:.cpp=.o)
 
-SRCS=$(wildcard src/*.cpp)
-OBJS=$(SRCS:.cpp=.o)
+all: $(nomePrograma)
 
-# compile every cpp file under src/
+$(nomePrograma): $(OBJS)
+	g++ -o $(nomePrograma) $(OBJS) $(parametrosCompilacao)
+
+# %.o: %.cpp
 $(OBJS): %.o : %.cpp
-	$(Compiler) -c $< -o $@
+	g++ -c $< -o $@ $(parametrosCompilacao)
 
-$(mainProgram): $(OBJS)
-	$(Compiler) -o $(mainProgram) $(OBJS) $(CompilerParams)
+run: $(nomePrograma)
+	./$(nomePrograma)
 
-clean: 
-	rm -f $(OBJS) $(mainProgram) *.ghc
+clean:
+	rm -f *.o *.gch $(nomePrograma)
