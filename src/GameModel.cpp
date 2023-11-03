@@ -7,4 +7,4 @@ GameModel::~GameModel() {}
 
 EnumGameState GameModel::getGameState() const { return this->gameState; }
 
-bool GameModel::isGameOver() const { return false; }
+bool GameModel::isGameOver() const { return gameState == EnumGameState::OVER; }

@@ -1,5 +1,6 @@
 # EmberCraft
 
+- [ ] create WareHouse screen to display current Smithy balance, Items and materials, here you can list or destroy them;
 
 MENU:
     1. Move to Merchant's Store
@@ -29,6 +30,12 @@ BUY (shows balance)
     b. merchant material b with price Y
     1. Go back (MERCHANT)
 
+
+
+MVC:
+    M (chama func the materiais, banco, items, etc)
+    V (mostra as opcoes acima dependendo do estado)
+    C (valida opcao escolhida para estado corrente)
 
 
 
@@ -121,52 +128,47 @@ Category:
 
 THE PROJECT NEEDS TO UTILIZE THE FOLLOWING FUNCTIONALITY FROM C++11
 
-- [ ] Access modifiers public/private
-- [ ] Constructors
+- [x] Access modifiers public/private
+- [x] Constructors
 - [ ] Dynamic allocation with new/delete
-- [ ] This, references, and asserts
+- [x] This, references, and asserts
 - [ ] Standard Template Library (STL)
-- [ ] Forward declarations & friendship
-- [ ] Static members
+- [x] Forward declarations & friendship
+- [x] Static members
 - [ ] Destructors
-- [ ] Const
-- [ ] Parametric polymorphism <T>
+- [x] Const
+- [x] Parametric polymorphism <T>
 - [ ] Inheritance
 - [ ] Virtual functions
-- [ ] Namespaces
+- [x] Namespaces
 
 ---
 
-Dismantler class
+# Chalk Styles
 
-- Dismantles anything
-- Can provide source materials
-- Can earn exp depending on the quality of the Item and the level of the smithy
-
-- Workshop
-
-Craft blueprint x
-Improve blueprint x (N rune stones) (min level Y)
-Destroy blueprint x
-
-Improve tool x (M rune stones)
-Dismantle tool x
-Destroy tool x
-
-Improve material x (N rune stones) (min level Y)
-Destroy material x
-
-Improve Item x
-Dismantle Item x
-Destroy Item x
-
-- Merchant
-
-inspect Merchant inventory
-Sell blueprint x
-Sell tool x
-Sell material x
-Sell Item x
+| Modifiers    | Colors       | Backgrounds    |
+|--------------|--------------|----------------|
+| bold         | black        | bgBlack        |
+| dim          | red          | bgRed          |
+| italic       | green        | bgGreen        |
+| underline    | yellow       | bgYellow       |
+| overline     | blue         | bgBlue         |
+| blink        | magenta      | bgMagenta      |
+| inverse      | cyan         | bgCyan         |
+| hidden       | white        | bgWhite        |
+| strike       | blackBright  | bgBlackBright  |
+|doubleOverline| grey         | bgGrey         |
+| addStyle     | gray         | bgGray         |
+| normal       | redBright    | bgRedBright    |
+| notItalic    | greenBright  | bgGreenBright  |
+| notOverline  | yellowBright | bgYellowBright |
+| notUnderline | blueBright   | bgBlueBright   |
+| notBlink     | magentaBright| bgMagentaBright|
+| notInverse   | cyanBright   | bgCyanBright   |
+| reveal       | whiteBright  | bgWhiteBright  |
+| notStrike    | rgb          | bgRgb          |
+|              | hex          | bgHex          |
+|              | code         | bgCode         |
 
 -- inventory
 

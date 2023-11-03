@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include "MVC/GameController.hpp"
-#include "MVC/GameModel.hpp"
-#include "MVC/GameView.hpp"
+#include "GameController.hpp"
+#include "GameModel.hpp"
+#include "GameView.hpp"
 
 using namespace ember;
 
@@ -14,8 +14,6 @@ void Game::run() {
     GameView view;
     GameController controller(&model, &view);
     // view.setListener(&controller);
-
-    view.displayTitle();
 
     // Main game loop
     bool isGameOver = false;

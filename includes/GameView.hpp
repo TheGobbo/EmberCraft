@@ -1,16 +1,21 @@
-#if !defined(GAME_VIEW_HPP)
+#ifndef GAME_VIEW_HPP
 #define GAME_VIEW_HPP
 
+// #include "GameController.hpp"
 #include "GameModel.hpp"
 
 namespace ember {
+// class GameController;
 // Define methods to display game information to the player.
 class GameView {
+    // friend GameController;
+    friend class GameController;
+    // friend void GameController::setGameState(EnumGameState gameState);
+
    public:
     GameView();
     ~GameView();
 
-    void setGameState(EnumGameState gameState);  // friend with controller (?)
     // void setListener(GameController* controller); // ???
 
     void displayTitle() const;
@@ -23,7 +28,7 @@ class GameView {
     void displayBuy() const;
     void displaySell() const;
 
-    void displayBalance() const;
+    void displayBalance(double balance) const;
 
    private:
     EnumGameState gameState;

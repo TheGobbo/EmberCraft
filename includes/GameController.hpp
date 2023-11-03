@@ -20,16 +20,27 @@ class GameController {
     GameView* view;
 
     static short MAX_NUM;
+    static std::string warn_invalid_option;
+    static std::string warn_only_numbers;
 
     /*~~~ validade user input ~~~*/
     void processMenuInput(const short& input);
+    void processSmithyInput(const short& input);
+    void processMerchantInput(const short& input);
+    void processBuyInput(const std::string& input);
+    void processSellInput(const std::string& input);
+
     // void process
 
     /*~~~ apply state change ~~~*/
     void moveToMerchant();
     void moveToSmithy();
+    void moveToBuy();
+    void moveToSell();
+    void moveToMenu();
 
     /*~~~ UTILS ~~~*/
+    short parseNumericInput(const std::string& input);
     void setGameState(EnumGameState gameState);
     bool isWholeNumber(const std::string& input);
 };

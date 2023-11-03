@@ -1,4 +1,4 @@
-#if !defined(GAME_MODEL_HPP)
+#ifndef GAME_MODEL_HPP
 #define GAME_MODEL_HPP
 
 namespace ember {
@@ -8,6 +8,8 @@ enum class EnumGameState { MENU, WORKSHOP, MERCHANT, BUY, SELL, OVER };
 // Define methods to manage game state, materials, crafting, and player
 // interactions.
 class GameModel {
+    friend class GameController;
+
    public:
     GameModel();   // Constructor
     ~GameModel();  // Destructor
