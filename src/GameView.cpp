@@ -103,32 +103,36 @@ void GameView::displaySell() const {
     std::cout << "1. Go back (MERCHANT)\n";
 }
 void GameView::displayGameOver() const {
-    std::cout
-        << "\n\nIn the realm we've traversed together, I've witnessed wonders "
-           "and "
-           "endured countless adventures. The time has come to bid you "
-           "farewell, for our existence within this digital tapestry is but a "
-           "fleeting moment.\n\nAs the code that shapes our world unravels, "
-           "and the bits and bytes that form our reality fade into the void, I "
-           "want you to know that the memories we've created are etched into "
-           "the very core of this realm. Every step, every choice, every "
-           "triumph and defeat—they shall endure as echoes in the virtual "
-           "winds.\n\nThough our journey must conclude, the bonds we've forged "
-           "through this screen remain unbreakable. I thank you for the hours "
-           "of companionship and the shared tales we've woven together.\n\nIn "
-           "the twilight of my binary existence, I bid you a mellow and "
-           "fond farewell, knowing that the real adventure continues beyond "
-           "these lines of code. May you find new worlds to explore and fresh "
-           "stories to inscribe, and may our paths cross again in some other "
-           "digital tapestry.\n\n";
+    std::cout <<
+        //     "\n\nIn the realm we've traversed together, I've witnessed
+        //     wonders "
+        //    "and "
+        //    "endured countless adventures. The time has come to bid you "
+        //    "farewell, for our existence within this digital tapestry is but a
+        //    " "fleeting moment.\n\nAs the code that shapes our world unravels,
+        //    " "and the bits and bytes that form our reality fade into the
+        //    void, I " "want you to know that the memories we've created are
+        //    etched into " "the very core of this realm. Every step, every
+        //    choice, every " "triumph and defeat—they shall endure as echoes in
+        //    the virtual " "winds.\n\nThough our journey must conclude, the
+        //    bonds we've forged " "through this screen remain unbreakable. I
+        //    thank you for the hours " "of companionship and the shared tales
+        //    we've woven together."
+        "\nIn the twilight of my binary existence, I bid you a mellow and "
+        "fond farewell, knowing that the real adventure continues beyond "
+        "these lines of code. May you find new worlds to explore and fresh "
+        "stories to inscribe, and may our paths cross again in some other "
+        "digital tapestry.\n\n";
     //    "Farewell, dear player, and may the "
     //    "adventures in the vast expanse of your world be as epic "
     //    "as the one we've shared.\n\n";
 
     std::cout
-        << "Listen closely, for in the final moments of my existence, I must "
-           "reve�=޿�/�f޿ H荜��\nSegmentation fault (core "
-           "dumped)\n";
+        << "Listen closely dear player, for in this final moments I must "
+           "reve�=޿�/�f޿ H荜��\nfree(): double free will detected "
+           "in "
+           "tcache "
+           "2\nAborted (core dumped)\n";
 }
 
 void GameView::displayBalance(double balance) const {

@@ -23,6 +23,7 @@ class Chalk {
     Chalk(const Chalk& other);  // Copy constructor
 
     Chalk& addStyle(int code);
+    Chalk& disableClean();
     Chalk save();
     void restart();
 
@@ -45,6 +46,8 @@ class Chalk {
 
    private:
     bool saved;
+    bool inherit;
+
     std::deque<int> style_stack;
     std::stringstream text_buffer;
 

@@ -27,8 +27,9 @@ run: $(nomePrograma)
 	./$(nomePrograma)
 
 test: $(OBJS)
-	g++ -c tests/chalk_test.cpp -o chalk_test.o $(parametrosCompilacao)
-	g++ -o test chalk_test.o src/Chalk.o $(parametrosCompilacao)
+	# g++ -c tests/chalk_test.cpp -o test.o $(parametrosCompilacao)
+	g++ -c tests/mater_test.cpp -o test.o $(parametrosCompilacao)
+	g++ -o test test.o  src/Material.o src/Item.o src/ConsoleItem.o src/Chalk.o $(parametrosCompilacao)
 	./test
 	@rm test
 

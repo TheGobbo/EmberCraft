@@ -37,29 +37,6 @@ MVC:
     V (mostra as opcoes acima dependendo do estado)
     C (valida opcao escolhida para estado corrente)
 
-
-
-
-
-
-Name of the Game: EmberCraft
-
-A structure for a TEXT-BASED smithy game where you craft fantastical items, using software engineering concepts, using the C++ language:
-
-1. Model-View-Controller (MVC) Architecture: The game will have a Model that represents the game world and its objects, a View that displays the game to the user,
-   and a Controller that handles user input and updates the game state accordingly.
-2. Object-Oriented Design: The game's objects will be represented as classes in C++. Each class will have attributes (data
-   members) and methods (functions) that describe the behavior of the object.
-3. Data Structures and Algorithms: The game will use data structures such as arrays, linked lists, and trees to store and manipulate objects and information. It
-   will also use algorithms to perform tasks such as searching, sorting, and pathfinding.
-4. User Interface: The game's user interface (UI) will be TEXT-BASED, with the player entering commands through a keyboard or other input device. The UI will
-   display information about the player's inventory, equipment, and current location in the game world.
-5. Game Loop: The game loop will handle the basic flow of the game, updating the game state and rendering the UI on each iteration.
-6. Storage and Loading: The game will use a storage system to save and load the player's progress, allowing them to pick up where they left off or continue from a
-   previous save.
-7. Testing and Debugging: The game will be thoroughly tested and debugged to ensure that it is functioning correctly and providing a fun and engaging experience
-   for the player.
-
 ---
 
 ## Possible player locations:

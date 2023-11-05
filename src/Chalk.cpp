@@ -9,11 +9,12 @@
 using namespace color;
 
 // Constructor
-Chalk::Chalk() : saved{false} {}
+Chalk::Chalk() : saved{false}, inherit{false} {}
 
 // Copy constructor
 Chalk::Chalk(const Chalk& other)
     : saved{other.saved},
+      inherit{other.inherit},
       style_stack(other.style_stack),
       text_buffer(other.text_buffer.str()) {}
 
@@ -128,6 +129,13 @@ std::string Chalk::str() {
     return result;
 }
 
+// prevent the reset of the strings style, warning: this may cause style leaks
+// in nested style calls
+Chalk& Chalk::disableClean() {
+    this->inherit = true;
+    return *this;
+}
+
 // prevent the erasing of the style in a Chalk variable after printing
 Chalk Chalk::save() {
     if (this->saved) return *this;
@@ -146,7 +154,7 @@ std::string Chalk::formatter() const {
     std::deque<int>::const_iterator it, start = this->style_stack.begin();
     it = start;
 
-    std::string style = "\e[";
+    std::string style = ((this->inherit) ? "\e[" : "\e[");
     for (; it != this->style_stack.end(); ++it) {
         if (this->saved && *it == -1) continue;
         style +=

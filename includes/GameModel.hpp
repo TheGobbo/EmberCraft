@@ -11,8 +11,8 @@ class GameModel {
     friend class GameController;
 
    public:
-    GameModel();   // Constructor
-    ~GameModel();  // Destructor
+    GameModel();
+    ~GameModel();
 
     EnumGameState getGameState() const;
 
