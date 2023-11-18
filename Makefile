@@ -4,6 +4,8 @@
 parametrosCompilacao=-Wall -I./includes#-Wshadow 
 nomePrograma=main
 
+.PHONY: tests clean
+
 # Add a variable for the DNDBUG flag for build target
 DNDBUG=-DNDBUG
 
@@ -26,12 +28,17 @@ build: $(OBJS)
 run: $(nomePrograma)
 	./$(nomePrograma)
 
-test: $(OBJS)
-	# g++ -c tests/chalk_test.cpp -o test.o $(parametrosCompilacao)
-	g++ -c tests/mater_test.cpp -o test.o $(parametrosCompilacao)
-	g++ -o test test.o  src/Material.o src/Item.o src/ConsoleItem.o src/Chalk.o $(parametrosCompilacao)
-	./test
-	@rm test
+DONT_TEST=tests/test_chalk.cpp tests/test_craft.cpp tests/test_material.cpp tests/test_warehouse.cpp tests/test_market.cpp
+tests: $(OBJS)
+	@for t in $(filter-out $(DONT_TEST), $(wildcard tests/test_*.cpp)); do \
+		echo "Compiling & running $$t"; \
+		g++ -c $$t -o test_program.o $(parametrosCompilacao); \
+		g++ -o test_program test_program.o $(filter-out main.o, $(OBJS)) $(parametrosCompilacao);\
+		valgrind --leak-check=full --show-leak-kinds=all ./test_program; \
+	done
+# ./test_program; 
+
+	@rm -f test_program test_program.o
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)

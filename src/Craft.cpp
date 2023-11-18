@@ -10,60 +10,122 @@ const std::vector<std::string> Craft::categories = {
     "Amulet", "Ring",   "Helm",    "Gauntlet", "Robe",   "Talisman",
     "Quiver", "Cloak",  "Chalice", "Greaves",  "Scepter"};
 
+Craft::Craft() : Item{} {
+    this->category_idx = Item::uniformDice(Craft::categories.size() - 1);
+}
+
 int Craft::getCost() const {
     return Item::getCost() * this->getCategoryModifier();
 }
 
-// short int Craft::getQualidade(){}
+void Craft::setCategory(size_t index) {
+    if (index > Craft::categories.size() || index <= 0) {
+        throw std::invalid_argument(
+            "Index of Craft Category is out of range: " +
+            std::to_string(index));
+    }
+
+    this->category_idx = index;
+}
+
+std::string Craft::getCategory() const {
+    return Craft::categories[this->category_idx];
+}
 
 float Craft::getCategoryModifier() const {
-    switch (this->category) {
-        case EnumCraftCategory::Sword:
+    switch (this->category_idx + 1) {
+        // EnumCraftCategory::Sword
+        case 1:
             return 1.42;
-        case EnumCraftCategory::Shield:
+
+        // EnumCraftCategory::Shield
+        case 2:
             return 2.12;
-        case EnumCraftCategory::Arrow:
+
+        // EnumCraftCategory::Arrow
+        case 3:
             return 0.15;
-        case EnumCraftCategory::Axe:
+
+        // EnumCraftCategory::Axe
+        case 4:
             return 1.45;
-        case EnumCraftCategory::Staff:
+
+        // EnumCraftCategory::Staff
+        case 5:
             return 2.55;
-        case EnumCraftCategory::Orb:
+
+        // EnumCraftCategory::Orb
+        case 6:
             return 3.68;
-        case EnumCraftCategory::Wand:
+
+        // EnumCraftCategory::Wand
+        case 7:
             return 1.33;
-        case EnumCraftCategory::Dagger:
+
+        // EnumCraftCategory::Dagger
+        case 8:
             return 1.81;
-        case EnumCraftCategory::Hammer:
+
+        // EnumCraftCategory::Hammer
+        case 9:
             return 1.15;
-        case EnumCraftCategory::Bow:
+
+        // EnumCraftCategory::Bow
+        case 10:
             return 1.10;
-        case EnumCraftCategory::Spear:
+
+        // EnumCraftCategory::Spear
+        case 11:
             return 1.50;
-        case EnumCraftCategory::Armor:
+
+        // EnumCraftCategory::Armor
+        case 12:
             return 7.42;
-        case EnumCraftCategory::Amulet:
+
+        // EnumCraftCategory::Amulet
+        case 13:
             return 0.5;
-        case EnumCraftCategory::Ring:
+
+        // EnumCraftCategory::Ring
+        case 14:
             return 0.05;
-        case EnumCraftCategory::Helm:
+
+        // EnumCraftCategory::Helm
+        case 15:
             return 1.15;
-        case EnumCraftCategory::Gauntlet:
+
+        // EnumCraftCategory::Gauntlet
+        case 16:
             return 1.16;
-        case EnumCraftCategory::Robe:
+
+        // EnumCraftCategory::Robe
+        case 17:
             return 1.17;
-        case EnumCraftCategory::Talisman:
+
+        // EnumCraftCategory::Talisman
+        case 18:
             return 0.90;
-        case EnumCraftCategory::Quiver:
+
+        // EnumCraftCategory::Quiver
+        case 19:
             return 0.6;
-        case EnumCraftCategory::Cloak:
+
+        // EnumCraftCategory::Cloak
+        case 20:
             return 1.20;
-        case EnumCraftCategory::Chalice:
+
+        // EnumCraftCategory::Chalice
+        case 21:
             return 0.5;
-        case EnumCraftCategory::Greaves:
+
+        // EnumCraftCategory::Greaves
+        case 22:
             return 1.70;
-        case EnumCraftCategory::Scepter:
+
+        // EnumCraftCategory::Scepter
+        case 23:
             return 3.23;
+
         default:
             throw std::runtime_error("Impossible EnumCraftCategory reached");
             return 0.0;

@@ -1,29 +1,38 @@
 #if !defined(ITEM_HPP)
 #define ITEM_HPP
 
+#include <random>
 #include <string>
 
 namespace ember {
 class Item {
    public:
-    Item(const std::string& nome, const std::string& desc, short int qualidade);
+    Item(const std::string& nome, const std::string& desc, int qualidade);
+    Item(const std::string& nome, const std::string& desc);
     Item();
-    ~Item() = default;
 
-    Item& setNome(const std::string& nome);
-    Item& setDescricao(const std::string& desc);
-    Item& setQualidade(short int qualidade);
+    virtual ~Item() = default;
+
+    virtual void setNome(const std::string& nome);
+    virtual void setDescricao(const std::string& desc);
+    virtual void setQualidade(int qualidade);
+
+    virtual int getCost() const;
 
     std::string getNome() const;
     std::string getDescricao() const;
-    short int getQualidade() const;
+    int getQualidade() const;
 
-    virtual int getCost() const;
+    void randomQuality();
+
+    static int uniformDice(int max);
 
    protected:
     std::string nome;
     std::string desc;
-    short int qualidade;
+    int qualidade;
+
+    static std::mt19937 dice_gen;
 };
 }  // namespace ember
 

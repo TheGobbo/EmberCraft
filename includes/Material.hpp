@@ -10,9 +10,9 @@
 namespace ember {
 class Material : public Item {
    public:
-    Material(const std::string& base, const std::string& modifier);
+    Material(const std::string& name, const std::string& desc);
     Material();
-    ~Material() = default;
+    virtual ~Material() = default;
 
     virtual int getCost() const override;
     int getQuantidade() const;
@@ -34,7 +34,7 @@ class Material : public Item {
     static const std::vector<std::string> modifierMaterials;
 
     std::string getRandomAttribute(
-        const std::vector<std::string>& attributeList, std::mt19937& gen);
+        const std::vector<std::string>& attributeList);
 };
 }  // namespace ember
 

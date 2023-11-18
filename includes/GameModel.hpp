@@ -1,6 +1,9 @@
 #ifndef GAME_MODEL_HPP
 #define GAME_MODEL_HPP
 
+#include "Smithy.hpp"
+#include "Warehouse.hpp"
+
 namespace ember {
 // Possible game states
 enum class EnumGameState { MENU, WORKSHOP, MERCHANT, BUY, SELL, OVER };
@@ -21,6 +24,8 @@ class GameModel {
    private:
     EnumGameState gameState;
 
+    Smithy* smithy;
+    Warehouse* warehouse;
     // void setGameState(const EnumGameState& gameState);
 };
 }  // namespace ember

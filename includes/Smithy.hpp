@@ -3,47 +3,24 @@
 
 #include <string>
 
-class Warehouse;
-
+namespace ember {
 class Smithy {
    public:
     Smithy(/* args */);
     ~Smithy();
 
+    void addCoins(const int coins);
+    bool subtractCoins(const int coins);
+
    private:
-    // Stock -> Items, Materials, Tools, ...
     std::string name;
+    int coins;
     int exp;
     int level;
-    int coins;
+
     // has in store both crafts and materials, manages aditions and removals
     // Warehouse stock;
 };
-
-Smithy::Smithy(/* args */) {}
-
-Smithy::~Smithy() {}
-
-#endif  // SMITHY_HPP
-
-/*#ifndef PLAYER_HPP
-#define PLAYER_HPP
-#include <string>
-
-namespace ember {
-class Player {
-   public:
-    Player();
-    ~Player();
-
-    const std::string& getName() const;
-    void setName(const std::string& name);
-
-   private:
-    std::string name;
-    int exp;
-    int level;
-};
 }  // namespace ember
 
-#endif*/
+#endif  // SMITHY_HPP
