@@ -8,8 +8,7 @@ using namespace ember;
 std::random_device rd;
 std::mt19937 Item::dice_gen{rd()};
 
-Item::Item(const std::string& nome, const std::string& desc,
-           int qualidade)
+Item::Item(const std::string& nome, const std::string& desc, int qualidade)
     : nome{nome}, desc{desc}, qualidade{qualidade} {}
 
 Item::Item(const std::string& nome, const std::string& desc)
@@ -38,6 +37,11 @@ int Item::uniformDice(int max) {
     std::uniform_int_distribution<int> dice(1, max);
 
     return dice(Item::dice_gen);
+}
+
+std::string Item::getRandomAttribute(
+    const std::vector<std::string>& attributeList) {
+    return attributeList[Item::uniformDice(attributeList.size() - 1)];
 }
 
 void Item::setNome(const std::string& nome) { this->nome = nome; }

@@ -35,11 +35,6 @@ int Material::getCost() const { return Item::getCost() * 0.5; }
 
 int Material::getQuantidade() const { return this->quantidade; }
 
-std::string Material::getRandomAttribute(
-    const std::vector<std::string>& attributeList) {
-    return attributeList[Item::uniformDice(attributeList.size() - 1)];
-}
-
 std::string Material::generateMaterial() { return this->nome; }
 
 std::string Material::generateRandomMaterial() {

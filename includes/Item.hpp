@@ -24,6 +24,8 @@ class Item {
     int getQualidade() const;
 
     void randomQuality();
+    std::string getRandomAttribute(
+        const std::vector<std::string>& attributeList);
 
     static int uniformDice(int max);
 

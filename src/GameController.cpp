@@ -91,8 +91,7 @@ void GameController::processMenuInput(const short& input) {
             moveToSmithy();
             break;
         case 3:
-            this->view->displayBalance(0.0);
-            // moveToBank();
+            this->view->displayBalance(this->model->getBalance());
             break;
         default:
             std::cout << GameController::warn_invalid_option;
@@ -134,7 +133,7 @@ void GameController::processMerchantInput(const short& input) {
         case 3:
             moveToSell();
         case 4:
-            this->view->displayBalance(0.0);
+            this->view->displayBalance(this->model->getBalance());
             break;
 
         default:
@@ -144,16 +143,42 @@ void GameController::processMerchantInput(const short& input) {
 }
 
 void GameController::processBuyInput(const std::string& input) {
-    short option{parseNumericInput(input)};
-
-    // go back
-    if (option == 1) {
-        moveToMerchant();
+    if (input == "a") {
+        this->model->applyMarketBuy();
+        this->view->displayBalance(this->model->getBalance());
+        if (this->model->smithy->getCoins() < 0) {
+            std::cout << "YOU WENT BANKRUPT!\n";
+            this->setGameState(EnumGameState::OVER);
+        } else {
+            moveToMerchant();
+        }
+        this->model->market->clearCart();
         return;
     }
 
-    std::cout << "You just bought a " << input;
-    std::cout << " Your ballance is now $" << 0.0;
+    // go back
+    if (input == "b") {
+        moveToMerchant();
+        this->model->market->clearCart();
+        return;
+    }
+
+    std::istringstream iss(input);
+    int bought_id;
+    while (iss >> bought_id) {
+        // std::cout << "You just bought a " << bought_id << "\n";
+        try {
+            this->model->market->addToCart(bought_id);
+
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << " - Please try again\n";
+            this->model->market->clearCart();
+        }
+    }
+    // std::cout << " Your ballance is now ";
+    // this->view->displayBalance(this->model->getBalance());
+    std::cout << "\n";
+    this->model->market->listStore();
 }
 
 void GameController::processSellInput(const std::string& input) {
@@ -186,16 +211,20 @@ void GameController::moveToSmithy() {
 
 void GameController::moveToBuy() {
     assert(this->model->gameState == EnumGameState::MERCHANT);
+    this->setGameState(EnumGameState::BUY);
 
     std::cout << "You are now seeing the Merchant's Items for Sale!\n";
-    this->setGameState(EnumGameState::BUY);
+
+    this->model->market->listStore();
 }
 
 void GameController::moveToSell() {
     assert(this->model->gameState == EnumGameState::MERCHANT);
+    this->setGameState(EnumGameState::SELL);
 
     std::cout << "You moved to the Merchant's Trading Post!\n";
-    this->setGameState(EnumGameState::SELL);
+    this->model->warehouse->listCrafted();
+    this->model->warehouse->listMaterials();
 }
 
 void GameController::moveToMenu() { this->setGameState(EnumGameState::MENU); }

@@ -32,9 +32,6 @@ class Material : public Item {
     static const std::vector<std::string> historical;
     static const std::vector<std::string> baseMaterials;
     static const std::vector<std::string> modifierMaterials;
-
-    std::string getRandomAttribute(
-        const std::vector<std::string>& attributeList);
 };
 }  // namespace ember
 

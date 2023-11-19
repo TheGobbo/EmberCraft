@@ -9,6 +9,7 @@ class Smithy {
     Smithy(/* args */);
     ~Smithy();
 
+    int getCoins() const;
     void addCoins(const int coins);
     bool subtractCoins(const int coins);
 

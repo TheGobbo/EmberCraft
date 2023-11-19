@@ -1,6 +1,7 @@
 #ifndef GAME_MODEL_HPP
 #define GAME_MODEL_HPP
 
+#include "Market.hpp"
 #include "Smithy.hpp"
 #include "Warehouse.hpp"
 
@@ -17,7 +18,13 @@ class GameModel {
     GameModel();
     ~GameModel();
 
+    void update();
+
     EnumGameState getGameState() const;
+    int getBalance() const;
+
+    void marketBuyItem(int id);
+    void applyMarketBuy();
 
     bool isGameOver() const;
 
@@ -25,6 +32,7 @@ class GameModel {
     EnumGameState gameState;
 
     Smithy* smithy;
+    Market* market;
     Warehouse* warehouse;
     // void setGameState(const EnumGameState& gameState);
 };

@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+#include "Console.hpp"
 #include "GameModel.hpp"
 
 using namespace ember;
@@ -14,7 +15,7 @@ GameView::~GameView() {}
 
 // clang-format off
 void GameView::displayTitle() const {
-    std::cout << "\033[H\033[J";  // CTRL + L
+    // std::cout << "\033[H\033[J";  // CTRL + L
     std::cout << "\n\n";
     std::cout << "\t███████╗███╗░░░███╗██████╗░███████╗██████╗░░█████╗░██████╗░░█████╗░███████╗████████╗\n";
     std::cout << "\t██╔════╝████╗░████║██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝\n";
@@ -23,6 +24,17 @@ void GameView::displayTitle() const {
     std::cout << "\t███████╗██║░╚═╝░██║██████╦╝███████╗██║░░██║╚█████╔╝██║░░██║██║░░██║██║░░░░░░░░██║░░░\n";
     std::cout << "\t╚══════╝╚═╝░░░░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░░░░╚═╝░░░\n";
     std::cout << "\tBy E. Gobbo Willi V.G.\n\n\n";
+    // https://fsymbols.com/generators/carty/
+}
+
+void GameView::displayEnd() const {
+    std::cout << "\n\n";
+    std::cout << "\t░██████╗░░█████╗░███╗░░░███╗███████╗\t░█████╗░██╗░░░██╗███████╗██████╗░\n";
+    std::cout << "\t██╔════╝░██╔══██╗████╗░████║██╔════╝\t██╔══██╗██║░░░██║██╔════╝██╔══██╗\n";
+    std::cout << "\t██║░░██╗░███████║██╔████╔██║█████╗░░\t██║░░██║╚██╗░██╔╝█████╗░░██████╔╝\n";
+    std::cout << "\t██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░\t██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗\n";
+    std::cout << "\t╚██████╔╝██║░░██║██║░╚═╝░██║███████╗\t╚█████╔╝░░╚██╔╝░░███████╗██║░░██║\n";
+    std::cout << "\t░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝\t░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝\n";
 }
 // clang-format on
 
@@ -63,7 +75,6 @@ void GameView::displayGameScreen() const {
 }
 
 void GameView::displayMenu() const {
-    displayTitle();
     std::cout << "GAMESTATE IS MENU\n";
     std::cout << "1. Move to Merchant's Store\n";
     std::cout << "2. Move to Smithy's Workshop\n";
@@ -90,19 +101,23 @@ void GameView::displayMerchant() const {
 }
 void GameView::displayBuy() const {
     std::cout << "GAMESTATE IS BUY\n";
-    std::cout << "a. smithy item a with price X\n";
-    std::cout << "b. smithy item b with price Y\n";
-    std::cout << "n. Show Smithy's balance\n";
-    std::cout << "1. Go back (MERCHANT)\n";
+    std::cout << "Select the items you'd like to buy, e.g. 1 1 4 (two number "
+                 "1's and one number 4)\n";
+    std::cout << "a. Confirm Purchase\n";
+    std::cout << "b. Go back (MERCHANT)\n";
 }
 
 void GameView::displaySell() const {
     std::cout << "GAMESTATE IS SELL\n";
     std::cout << "a. merchant item a with price X\n";
     std::cout << "b. merchant material b with price Y\n";
-    std::cout << "1. Go back (MERCHANT)\n";
+    std::cout << "b. Go back (MERCHANT)\n";
 }
 void GameView::displayGameOver() const {
+    // std::cout << "YOU WENT BANKRUPT!\n";
+
+    displayEnd();
+
     std::cout <<
         //     "\n\nIn the realm we've traversed together, I've witnessed
         //     wonders "
@@ -127,14 +142,13 @@ void GameView::displayGameOver() const {
     //    "adventures in the vast expanse of your world be as epic "
     //    "as the one we've shared.\n\n";
 
-    std::cout
-        << "Listen closely dear player, for in this final moments I must "
-           "reve�=޿�/�f޿ H荜��\nfree(): double free will detected "
-           "in "
-           "tcache "
-           "2\nAborted (core dumped)\n";
+    // std::cout << "Listen closely dear player, for in this final moments I
+    // must "
+    //              "reve�=޿�/�f޿ H荜��\nfree(): double free will
+    //              detected in " "tcache 2\nAborted (core dumped)\n";
 }
 
-void GameView::displayBalance(double balance) const {
-    std::cout << "The Smithy's current balance is: $" << balance << " coins!\n";
+void GameView::displayBalance(int balance) const {
+    std::cout << "The Smithy's current balance is "
+              << Console::displayMoney(balance) << " coins!\n";
 }

@@ -15,6 +15,8 @@ void Game::run() {
     GameController controller(&model, &view);
     // view.setListener(&controller);
 
+    view.displayTitle();
+
     // Main game loop
     bool isGameOver = false;
     while (!isGameOver) {
@@ -27,6 +29,9 @@ void Game::run() {
 
         // Process user input and update the game state
         controller.processUserInput(userInput);
+
+        // Update the game state
+        model.update();
 
         // Check for game over conditions (e.g., player wins, loses, or quits)
         isGameOver = model.isGameOver();  // Custom method in GameModel

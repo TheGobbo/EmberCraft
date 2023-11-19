@@ -17,7 +17,7 @@ class Console {
     static std::string displayItem(const Item& item);
     static std::string displayCraft(const Craft& craft);
     static std::string displayMarketItem(const Item& item);
-    static std::string displayCost(const int cost);
+    static std::string displayMoney(const int cost);
 
    private:
     static std::string getItemFormat(const Item& item);

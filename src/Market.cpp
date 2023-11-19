@@ -44,7 +44,7 @@ void Market::removeFromCart(int index) {
 }
 int Market::getCartCost() {
     int cost = 0;
-    std::map<Item*, int>::const_iterator it = this->cart.begin();
+    std::map<Material*, int>::const_iterator it = this->cart.begin();
     for (; it != this->cart.end(); ++it) {
         cost += ((*it).first->getCost()) * (*it).second;
     }
@@ -52,8 +52,10 @@ int Market::getCartCost() {
     return cost;
 }
 
+std::map<Material*, int>& Market::getCart() { return this->cart; }
+
 // returns cost of cart
-void Market::finalizeBuy(Warehouse& warehouse, Smithy* smithy) {}
+// void Market::finalizeBuy(Warehouse& warehouse, Smithy* smithy) {}
 
 void Market::finalizeMaterialSell(Warehouse& warehouse, Smithy* smithy) {
     // add to card Item* from warehouse
@@ -63,7 +65,7 @@ void Market::finalizeCraftSell(Warehouse& warehouse, Smithy* smithy) {
     // add to card Item* from warehouse
 }
 
-void Market::cancel() { this->cart.clear(); }
+void Market::clearCart() { this->cart.clear(); }
 
 void Market::stockUpStore() {
     this->depleteStore();
@@ -96,7 +98,7 @@ void Market::updatesStore() {
 
 
     // Print the time difference in seconds
-    std::cout << "Time difference: " << elapsedSeconds.count() << " seconds" << std::endl;
+    std::cout << "Time until refresh: " << Market::refresh_rate.count() - elapsedSeconds.count() << " seconds" << std::endl;
     // clang-format on
 
     if (this->refresh_rate < elapsedSeconds) {
@@ -111,10 +113,11 @@ void Market::listStore() {
     std::vector<Material*>::const_iterator it = this->store.begin();
     int i = 1;
     for (; it != this->store.end(); ++it) {
-        Item* index = *it;
+        Material* index = *it;
         std::string qty = this->cart[index] > 0
                               ? color::Chalk{}.bold().str(this->cart[index])
                               : "0";
+
         std::cout << std::setw(2) << std::setfill(' ') << i << ". "
                   << Console::displayMarketItem(**it) << "x " << qty << '\n';
         ++i;
@@ -124,6 +127,6 @@ void Market::listStore() {
         << "-----------------------------------------------------------------"
            "-----------------------------------------------------------------";
     std::cout << "  " << color::Chalk{}.bold().inverse().str("Total:") << ' '
-              << Console::displayCost(this->getCartCost());
+              << Console::displayMoney(this->getCartCost());
     std::cout << std::endl;
 }

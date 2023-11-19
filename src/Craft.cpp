@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+#include "Material.hpp"
+
 using namespace ember;
 
 const std::vector<std::string> Craft::categories = {
@@ -10,8 +12,21 @@ const std::vector<std::string> Craft::categories = {
     "Amulet", "Ring",   "Helm",    "Gauntlet", "Robe",   "Talisman",
     "Quiver", "Cloak",  "Chalice", "Greaves",  "Scepter"};
 
+// Weapon Descriptions
+// clang-format off
+const std::vector<std::string> Craft::legacy = {"Mighty", "Searing", "Thunderous", "Venomous", "Divine", "Infernal", "Heroic", "Cursed", "Ancient", "Royal", "Fabled", "Mythical"};
+const std::vector<std::string> Craft::style = {"Elegant", "Brutal", "Swift", "Mystic", "Fierce", "Graceful"};
+const std::vector<std::string> Craft::enhancement = {"Enchanted", "Cursed", "Radiant", "Vorpal", "Abyssal", "Luminous"};
+const std::vector<std::string> Craft::material = {"Adamantine", "Obsidian", "Crystaline", "Ebony", "Mithril", "Dragonbone"};
+const std::vector<std::string> Craft::alignment = {"Righteous", "Malevolent", "Neutral", "Chaotic", "Lawful", "Harmonious"};
+const std::vector<std::string> Craft::effect = {"Flaming", "Freezing", "Shocking", "Smiting", "Draining", "Banishing"};
+const std::vector<std::string> Craft::origin = {"Celestial", "Demonic", "Forged", "Legendary", "Mystical", "Ancient"};
+// clang-format on
+
 Craft::Craft() : Item{} {
     this->category_idx = Item::uniformDice(Craft::categories.size() - 1);
+
+    this->randomCraft();
 }
 
 int Craft::getCost() const {
@@ -30,6 +45,28 @@ void Craft::setCategory(size_t index) {
 
 std::string Craft::getCategory() const {
     return Craft::categories[this->category_idx];
+}
+
+std::string Craft::randomCraft() {
+    std::string excitingMaterial = "";
+
+    // Randomly select attributes from the vectors
+    short roll = Item::uniformDice(20);
+    if (roll >= 15) {
+        this->nome = this->getRandomAttribute(legacy);
+    } else if (roll >= 10) {
+        this->nome = this->getRandomAttribute(style);
+    } else {
+        this->nome = this->getRandomAttribute(enhancement);
+    }
+
+    this->nome += " " + this->getRandomAttribute(effect);
+    this->nome += " " + this->getRandomAttribute(alignment);
+    this->nome += " " + this->getCategory();
+
+    this->desc = Material().getDescricao();
+
+    return this->nome + ", " + this->desc;
 }
 
 float Craft::getCategoryModifier() const {

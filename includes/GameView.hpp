@@ -19,6 +19,8 @@ class GameView {
     // void setListener(GameController* controller); // ???
 
     void displayTitle() const;
+    void displayEnd() const;
+
     void displayGameScreen() const;
     void displayGameOver() const;
 
@@ -28,7 +30,7 @@ class GameView {
     void displayBuy() const;
     void displaySell() const;
 
-    void displayBalance(double balance) const;
+    void displayBalance(int balance) const;
 
    private:
     EnumGameState gameState;

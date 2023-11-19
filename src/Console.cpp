@@ -50,10 +50,19 @@ std::string Console::displayCraft(const Craft& craft) {
            getCostFormat(craft);
 }
 
-std::string Console::displayCost(const int cost) {
-    color::Chalk cost_style = color::Chalk{}.rgb(0, 255, 0).bold().save();
+std::string Console::displayMoney(const int money) {
+    color::Chalk money_style = color::Chalk{}.rgb(0, 255, 0).bold().save();
 
-    return getField("$", 6, std::to_string(cost), &cost_style);
+    // return getField("$", 6, std::to_string(money), &money_style);
+
+    std::string result = color::Chalk{}.underline().str("$") + ": ";
+    std::ostringstream oss;
+
+    oss << std::left << std::setw(6) << std::setfill(' ') << money;
+
+    result += money_style.str(oss.str());
+
+    return result + " | ";
 }
 
 /* FORMAT */
@@ -129,6 +138,6 @@ std::string Console::getField(const std::string& name, int width,
 }
 
 std::string Console::trim(const std::string& text, int maxLength) {
-    return text.size() > maxLength ? text.substr(0, maxLength - 3) + "..."
-                                   : text;
+    return (int)text.size() > maxLength ? text.substr(0, maxLength - 3) + "..."
+                                        : text;
 }

@@ -19,11 +19,21 @@ class Craft : public Item {
     std::string getCategory() const;
     virtual int getCost() const override;
 
+    std::string randomCraft();
+
    private:
     static const std::vector<std::string> categories;
     uint8_t category_idx = 0;
 
     float getCategoryModifier() const;
+
+    static const std::vector<std::string> legacy;
+    static const std::vector<std::string> style;
+    static const std::vector<std::string> enhancement;
+    static const std::vector<std::string> material;
+    static const std::vector<std::string> alignment;
+    static const std::vector<std::string> effect;
+    static const std::vector<std::string> origin;
 };
 }  // namespace ember
 

@@ -23,6 +23,7 @@ class Market {
     // controller takes care of figuring out the indexes?
     void addToCart(int index);
     void removeFromCart(int index);
+    std::map<Material*, int>& getCart();
 
     int getCartCost();
 
@@ -31,12 +32,12 @@ class Market {
     void finalizeMaterialSell(Warehouse& warehouse, Smithy* smithy);
     void finalizeCraftSell(Warehouse& warehouse, Smithy* smithy);
 
-    void cancel();
+    void clearCart();
 
    private:
     std::vector<Material*> store;
     // get the cost of each one, remove them from warehouse
-    std::map<Item*, int> cart;
+    std::map<Material*, int> cart;
     // last store refresh time
     std::chrono::time_point<std::chrono::steady_clock> last_refresh;
 
