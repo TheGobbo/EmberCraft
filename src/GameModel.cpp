@@ -5,6 +5,8 @@
 #include <iostream>
 #include <set>
 
+#include "Console.hpp"
+
 using namespace ember;
 
 GameModel::GameModel() {
@@ -89,6 +91,26 @@ void GameModel::sellCrafted(const std::string& input) {
     }
 
     this->smithy->addCoins(profits);
+}
+
+void GameModel::createNewItem(const int mat_idx) {
+    Craft* newItem = nullptr;
+    try {
+        Material mat = this->warehouse->getMaterial(mat_idx);
+        newItem = new Craft{mat.getNome(), mat.getQualidade()};
+        this->warehouse->addCrafted(newItem);
+        this->warehouse->removeMaterial(mat_idx);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    if (newItem == nullptr) {
+        std::cout << "There was a failure while buiding your item ;-;\n";
+        return;
+    }
+
+    std::cout << "You have successfully created an Item!!!\n";
+    Console::printCraft(*newItem);
 }
 
 bool GameModel::isGameOver() const { return this->gameState == EnumGameState::OVER; }

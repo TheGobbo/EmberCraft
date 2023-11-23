@@ -29,15 +29,19 @@ Craft::Craft() : Item{} {
     this->randomCraft();
 }
 
-int Craft::getCost() const {
-    return Item::getCost() * this->getCategoryModifier();
+Craft::Craft(const std::string& material, int qualidade) : Item{} {
+    this->category_idx = Item::uniformDice(Craft::categories.size() - 1);
+    this->qualidade = std::min(100, qualidade + 10);
+    this->nome = randomName();
+    this->desc = material;
 }
+
+int Craft::getCost() const { return Item::getCost() * this->getCategoryModifier(); }
 
 void Craft::setCategory(size_t index) {
     if (index > Craft::categories.size() || index <= 0) {
-        throw std::invalid_argument(
-            "Index of Craft Category is out of range: " +
-            std::to_string(index));
+        throw std::invalid_argument("Index of Craft Category is out of range: " +
+                                    std::to_string(index));
     }
 
     this->category_idx = index;
@@ -47,26 +51,29 @@ std::string Craft::getCategory() const {
     return Craft::categories[this->category_idx];
 }
 
-std::string Craft::randomCraft() {
-    std::string excitingMaterial = "";
-
+std::string Craft::randomName() {
+    std::string nome;
     // Randomly select attributes from the vectors
     short roll = Item::uniformDice(20);
     if (roll >= 15) {
-        this->nome = this->getRandomAttribute(legacy);
+        nome = this->getRandomAttribute(legacy);
     } else if (roll >= 10) {
-        this->nome = this->getRandomAttribute(style);
+        nome = this->getRandomAttribute(style);
     } else {
-        this->nome = this->getRandomAttribute(enhancement);
+        nome = this->getRandomAttribute(enhancement);
     }
 
-    this->nome += " " + this->getRandomAttribute(effect);
-    this->nome += " " + this->getRandomAttribute(alignment);
-    this->nome += " " + this->getCategory();
+    nome += " " + this->getRandomAttribute(effect);
+    nome += " " + this->getRandomAttribute(alignment);
+    nome += " " + this->getCategory();
 
+    return nome;
+}
+
+std::string Craft::randomCraft() {
     this->desc = Material().getDescricao();
 
-    return this->nome + ", " + this->desc;
+    return this->randomName() + ", " + this->desc;
 }
 
 float Craft::getCategoryModifier() const {

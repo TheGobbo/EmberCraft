@@ -13,12 +13,14 @@ class Craft : public Item {
    public:
     using Item::Item;
     Craft();
+    Craft(const std::string& material, int qualidade);
     virtual ~Craft() = default;
 
     void setCategory(size_t index);
     std::string getCategory() const;
     virtual int getCost() const override;
 
+    std::string randomName();
     std::string randomCraft();
 
    private:

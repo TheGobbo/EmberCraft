@@ -30,6 +30,8 @@ class GameModel {
     void sellMaterial(const std::string& input);
     void sellCrafted(const std::string& input);
 
+    void createNewItem(const int mat_idx);
+
     bool isGameOver() const;
 
    private:

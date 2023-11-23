@@ -88,7 +88,7 @@ void GameView::displayWorkshop() const {
     std::cout << "1. Move to Merchant's Store\n";
     std::cout << "2. Craft New Item\n";
     std::cout << "3. List available materials\n";
-    std::cout << "4. Destroy materials\n ";
+    std::cout << "4. List Crafts\n ";
 }
 
 void GameView::displayMerchant() const {

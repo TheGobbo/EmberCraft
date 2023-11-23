@@ -32,6 +32,7 @@ class GameController {
     void processMerchantInput(const short& input);
     void processBuyInput(const std::string& input);
     void processSellInput(std::string& input);
+    void processCreateItem();
 
     // void process
 

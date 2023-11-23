@@ -117,16 +117,13 @@ void GameController::processSmithyInput(const short& input) {
             moveToMerchant();
             break;
         case 2:
-            std::cout << "createNewItem\n";
-            // this->model->createNewItem();
+            this->processCreateItem();
             break;
         case 3:
-            // std::cout << "listSmithyMaterials\n";
             this->model->warehouse->listMaterials();
             break;
         case 4:
-            std::cout << "destroyMaterial\n";
-            // this->model->listSmithyMaterials();
+            this->model->warehouse->listCrafted();
             break;
         default:
             std::cout << GameController::warn_invalid_option;
@@ -231,6 +228,26 @@ void GameController::processSellInput(std::string& input) {
     // std::cout << "You successfully sold your items!\nYour balance is now at "
     //           << Console::displayMoney(this->model->smithy->getCoins());
     this->view->displayBalance(this->model->smithy->getCoins());
+}
+
+void GameController::processCreateItem() {
+    this->model->warehouse->listMaterials();
+
+    std::cout << "Choose the material to Craft!\nb. Go Back\n-> ";
+    std::string input;
+    std::cin >> input;
+    if (input == "b") {
+        return;
+    }
+
+    if (!GameController::isWholeNumber(input)) {
+        std::cout << "Please only type a single whole number!\n";
+        return;
+    }
+
+    int option = GameController::parseNumericInput(input);
+    this->model->createNewItem(option);
+    return;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
