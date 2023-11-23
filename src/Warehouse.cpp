@@ -9,8 +9,7 @@
 
 using namespace ember;
 
-Warehouse::Warehouse(unsigned int default_materials,
-                     unsigned int default_crafts) {
+Warehouse::Warehouse(unsigned int default_materials, unsigned int default_crafts) {
     for (unsigned int i = 1; i <= default_materials || i == 0; ++i) {
         this->addMaterial(new Material());
     }
@@ -51,6 +50,25 @@ void Warehouse::removeCrafted(const size_t index) {
     this->crafted.erase(this->crafted.begin() + index - 1);
 
     delete ptr;
+}
+
+const Craft& Warehouse::getCrafted(const size_t index) const {
+    if (index > this->crafted.size() || index <= 0) {
+        throw std::invalid_argument(
+            "Index of crafted from Warehouse is out of range: " +
+            std::to_string(index));
+    }
+
+    return *this->crafted.at(index - 1);
+}
+const Material& Warehouse::getMaterial(const size_t index) const {
+    if (index > this->materials.size() || index <= 0) {
+        throw std::invalid_argument(
+            "Index of material from Warehouse is out of range: " +
+            std::to_string(index));
+    }
+
+    return *this->materials.at(index - 1);
 }
 
 void Warehouse::clearMaterials() {
@@ -95,7 +113,7 @@ void Warehouse::listMaterials() const {
     int i = 1;
     for (Material* mat : this->materials) {
         std::cout << std::setw(2) << std::setfill(' ') << i << ". ";
-        Console::printItem(*mat);
+        Console::printMarketItem(*mat);
         ++i;
     }
 }

@@ -66,8 +66,7 @@ void GameView::displayGameScreen() const {
             break;
 
         default:
-            throw std::runtime_error(
-                "No such instance of EnumGameState, abort.");
+            throw std::runtime_error("No such instance of EnumGameState, abort.");
             break;
     }
 
@@ -109,35 +108,41 @@ void GameView::displayBuy() const {
 
 void GameView::displaySell() const {
     std::cout << "GAMESTATE IS SELL\n";
-    std::cout << "a. merchant item a with price X\n";
-    std::cout << "b. merchant material b with price Y\n";
+    std::cout << "WARNING, actions are taken immediately, and are not reversible\n";
+    std::cout << "Type `m` followed by the numbers of the materials you'd like "
+                 "to sell\n";
+    std::cout << "Type `c` followed by the numbers of the craft ids you'd like "
+                 "to sell\n";
     std::cout << "b. Go back (MERCHANT)\n";
 }
+
 void GameView::displayGameOver() const {
     // std::cout << "YOU WENT BANKRUPT!\n";
 
     displayEnd();
 
-    std::cout <<
-        //     "\n\nIn the realm we've traversed together, I've witnessed
-        //     wonders "
-        //    "and "
-        //    "endured countless adventures. The time has come to bid you "
-        //    "farewell, for our existence within this digital tapestry is but a
-        //    " "fleeting moment.\n\nAs the code that shapes our world unravels,
-        //    " "and the bits and bytes that form our reality fade into the
-        //    void, I " "want you to know that the memories we've created are
-        //    etched into " "the very core of this realm. Every step, every
-        //    choice, every " "triumph and defeat—they shall endure as echoes in
-        //    the virtual " "winds.\n\nThough our journey must conclude, the
-        //    bonds we've forged " "through this screen remain unbreakable. I
-        //    thank you for the hours " "of companionship and the shared tales
-        //    we've woven together."
-        "\nIn the twilight of my binary existence, I bid you a mellow and "
-        "fond farewell, knowing that the real adventure continues beyond "
-        "these lines of code. May you find new worlds to explore and fresh "
-        "stories to inscribe, and may our paths cross again in some other "
-        "digital tapestry.\n\n";
+    std::cout << "\n\n";
+    //     "\n\nIn the realm we've traversed together, I've witnessed
+    //     wonders "
+    //    "and "
+    //    "endured countless adventures. The time has come to bid you "
+    //    "farewell, for our existence within this digital tapestry is but a
+    //    " "fleeting moment.\n\nAs the code that shapes our world unravels,
+    //    " "and the bits and bytes that form our reality fade into the
+    //    void, I " "want you to know that the memories we've created are
+    //    etched into " "the very core of this realm. Every step, every
+    //    choice, every " "triumph and defeat—they shall endure as echoes in
+    //    the virtual " "winds.\n\nThough our journey must conclude, the
+    //    bonds we've forged " "through this screen remain unbreakable. I
+    //    thank you for the hours " "of companionship and the shared tales
+    //    we've woven together."
+
+    // "\nIn the twilight of my binary existence, I bid you a mellow and "
+    // "fond farewell, knowing that the real adventure continues beyond "
+    // "these lines of code. May you find new worlds to explore and fresh "
+    // "stories to inscribe, and may our paths cross again in some other "
+    // "digital tapestry.\n\n";
+
     //    "Farewell, dear player, and may the "
     //    "adventures in the vast expanse of your world be as epic "
     //    "as the one we've shared.\n\n";
@@ -149,6 +154,6 @@ void GameView::displayGameOver() const {
 }
 
 void GameView::displayBalance(int balance) const {
-    std::cout << "The Smithy's current balance is "
-              << Console::displayMoney(balance) << " coins!\n";
+    std::cout << "The Smithy's current balance is " << Console::displayMoney(balance)
+              << " coins!\n";
 }

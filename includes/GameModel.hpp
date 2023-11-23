@@ -25,6 +25,10 @@ class GameModel {
 
     void marketBuyItem(int id);
     void applyMarketBuy();
+    // void applyMarketSell();
+
+    void sellMaterial(const std::string& input);
+    void sellCrafted(const std::string& input);
 
     bool isGameOver() const;
 

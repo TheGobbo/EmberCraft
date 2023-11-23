@@ -19,6 +19,9 @@ class Warehouse {
     void removeMaterial(size_t index);
     void removeCrafted(const size_t index);
 
+    const Craft& getCrafted(const size_t index) const;
+    const Material& getMaterial(const size_t index) const;
+
     void clearMaterials();
     void clearCrafted();
 

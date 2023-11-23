@@ -16,7 +16,7 @@ namespace ember {
 class Market {
    public:
     Market();
-    ~Market();
+    virtual ~Market();
 
     void listStore();
 

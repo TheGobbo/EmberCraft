@@ -11,9 +11,12 @@ namespace ember {
 class GameController {
    public:
     GameController(GameModel* model, GameView* view);
+    virtual ~GameController() = default;
 
     const std::string getUserInput();
     void processUserInput(const std::string& input);
+
+    static bool isWholeNumber(const std::string& input);
 
    private:
     GameModel* model;
@@ -28,7 +31,7 @@ class GameController {
     void processSmithyInput(const short& input);
     void processMerchantInput(const short& input);
     void processBuyInput(const std::string& input);
-    void processSellInput(const std::string& input);
+    void processSellInput(std::string& input);
 
     // void process
 
@@ -42,7 +45,6 @@ class GameController {
     /*~~~ UTILS ~~~*/
     short parseNumericInput(const std::string& input);
     void setGameState(EnumGameState gameState);
-    bool isWholeNumber(const std::string& input);
 };
 }  // namespace ember
 

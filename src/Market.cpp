@@ -73,6 +73,8 @@ void Market::stockUpStore() {
     for (int i = 0; i < Market::store_capacity; i++) {
         this->store.push_back(new Material{});
     }
+
+    this->last_refresh = std::chrono::steady_clock::now();
 }
 
 void Market::depleteStore() {
@@ -96,14 +98,13 @@ void Market::updatesStore() {
     std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
     std::chrono::duration<double> elapsedSeconds = now - this->last_refresh;
 
+    if (this->refresh_rate < elapsedSeconds) {
+        this->stockUpStore();
+    }
 
     // Print the time difference in seconds
     std::cout << "Time until refresh: " << Market::refresh_rate.count() - elapsedSeconds.count() << " seconds" << std::endl;
     // clang-format on
-
-    if (this->refresh_rate < elapsedSeconds) {
-        this->stockUpStore();
-    }
 }
 
 void Market::listStore() {
@@ -123,9 +124,8 @@ void Market::listStore() {
         ++i;
     }
 
-    std::cout
-        << "-----------------------------------------------------------------"
-           "-----------------------------------------------------------------";
+    std::cout << "-----------------------------------------------------------------"
+                 "-----------------------------------------------------------------";
     std::cout << "  " << color::Chalk{}.bold().inverse().str("Total:") << ' '
               << Console::displayMoney(this->getCartCost());
     std::cout << std::endl;
