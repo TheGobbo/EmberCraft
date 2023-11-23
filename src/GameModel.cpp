@@ -93,24 +93,43 @@ void GameModel::sellCrafted(const std::string& input) {
     this->smithy->addCoins(profits);
 }
 
-void GameModel::createNewItem(const int mat_idx) {
+void GameModel::createNewItem(const std::string& input) {
+    std::istringstream iss{input};
+    int mat_id;
+    std::set<int, std::greater<int>> creating;
+
+    while (iss >> mat_id) {
+        try {
+            Material mat = this->warehouse->getMaterial(mat_id);
+            creating.insert(mat_id);
+            std::cout << "Creating item with material " << mat_id << '\n';
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << '\n';
+            std::cout << "There was a failure while buiding with the material " << mat_id << "\n";
+        }
+    }
+
     Craft* newItem = nullptr;
-    try {
-        Material mat = this->warehouse->getMaterial(mat_idx);
+    if(!creating.empty()){
+        std::cout << "You have successfully created the following items!!!\n";
+    }
+    for (const int& id : creating) {
+        Material mat = this->warehouse->getMaterial(id);
         newItem = new Craft{mat.getNome(), mat.getQualidade()};
         this->warehouse->addCrafted(newItem);
-        this->warehouse->removeMaterial(mat_idx);
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+        this->warehouse->removeMaterial(id);
+        Console::printCraft(*newItem);
     }
-
-    if (newItem == nullptr) {
-        std::cout << "There was a failure while buiding your item ;-;\n";
-        return;
-    }
-
-    std::cout << "You have successfully created an Item!!!\n";
-    Console::printCraft(*newItem);
 }
 
-bool GameModel::isGameOver() const { return this->gameState == EnumGameState::OVER; }
+bool GameModel::isGameOver() const {
+    return this->gameState == EnumGameState::OVER || this->gameState == EnumGameState::WON;
+}
+
+bool GameModel::isWinning() const {
+    int count_myths = this->warehouse->countMythCrafs();
+    int balance = this->smithy->getCoins();
+    int rich_win = 1000000000;  // 1.000.000.000 - One Billion
+
+    return count_myths >= 15 || balance >= rich_win;
+}

@@ -128,3 +128,12 @@ void Warehouse::listCrafted() const {
         ++i;
     }
 }
+
+int Warehouse::countMythCrafs() const {
+    int count = 0;
+    for(auto craft : this->crafted){
+        count += craft->getQualidade() == 100;
+    }
+    std::cout << "count myths : " << count << '\n';
+    return count;
+}

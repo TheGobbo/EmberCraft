@@ -19,10 +19,11 @@ class GameView {
     // void setListener(GameController* controller); // ???
 
     void displayTitle() const;
-    void displayEnd() const;
+    void displayGameOver() const;
+    void displayGameWon() const;
+    void displayGameEnd() const;
 
     void displayGameScreen() const;
-    void displayGameOver() const;
 
     void displayMenu() const;
     void displayWorkshop() const;

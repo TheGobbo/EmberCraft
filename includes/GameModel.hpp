@@ -7,7 +7,7 @@
 
 namespace ember {
 // Possible game states
-enum class EnumGameState { MENU, WORKSHOP, MERCHANT, BUY, SELL, OVER };
+enum class EnumGameState { MENU, WORKSHOP, MERCHANT, BUY, SELL, OVER, WON };
 
 // Define methods to manage game state, materials, crafting, and player
 // interactions.
@@ -30,9 +30,10 @@ class GameModel {
     void sellMaterial(const std::string& input);
     void sellCrafted(const std::string& input);
 
-    void createNewItem(const int mat_idx);
+    void createNewItem(const std::string& input);
 
     bool isGameOver() const;
+    bool isWinning() const;
 
    private:
     EnumGameState gameState;
