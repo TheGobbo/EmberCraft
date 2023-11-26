@@ -7,7 +7,6 @@
 #include <map>
 #include <vector>
 
-#include "Item.hpp"
 #include "Material.hpp"
 #include "Smithy.hpp"
 #include "Warehouse.hpp"
