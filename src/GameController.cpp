@@ -228,25 +228,28 @@ void GameController::processSellInput(std::string& input) {
     // std::cout << "You successfully sold your items!\nYour balance is now at "
     //           << Console::displayMoney(this->model->smithy->getCoins());
     this->view->displayBalance(this->model->smithy->getCoins());
+
+    if (this->model->isWinning()) {
+        this->setGameState(EnumGameState::WON);
+    }
 }
 
 void GameController::processCreateItem() {
     this->model->warehouse->listMaterials();
 
-    std::cout << "Choose the material to Craft!\nb. Go Back\n-> ";
+    std::cout << "Choose the material to Craft! There will be one Craft per Material selected\nb. Go Back\n-> ";
     std::string input;
-    std::cin >> input;
+    std::getline(std::cin, input);
     if (input == "b") {
         return;
     }
 
-    if (!GameController::isWholeNumber(input)) {
-        std::cout << "Please only type a single whole number!\n";
-        return;
+    this->model->createNewItem(input);
+
+    if(this->model->isWinning()){
+        this->setGameState(EnumGameState::WON);
     }
 
-    int option = GameController::parseNumericInput(input);
-    this->model->createNewItem(option);
     return;
 }
 

@@ -38,5 +38,5 @@ void Game::run() {
     }
 
     // Display the game over screen or results
-    view.displayGameOver();
+    view.displayGameEnd();
 }

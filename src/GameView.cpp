@@ -27,7 +27,7 @@ void GameView::displayTitle() const {
     // https://fsymbols.com/generators/carty/
 }
 
-void GameView::displayEnd() const {
+void GameView::displayGameOver() const {
     std::cout << "\n\n";
     std::cout << "\t░██████╗░░█████╗░███╗░░░███╗███████╗\t░█████╗░██╗░░░██╗███████╗██████╗░\n";
     std::cout << "\t██╔════╝░██╔══██╗████╗░████║██╔════╝\t██╔══██╗██║░░░██║██╔════╝██╔══██╗\n";
@@ -35,6 +35,16 @@ void GameView::displayEnd() const {
     std::cout << "\t██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░\t██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗\n";
     std::cout << "\t╚██████╔╝██║░░██║██║░╚═╝░██║███████╗\t╚█████╔╝░░╚██╔╝░░███████╗██║░░██║\n";
     std::cout << "\t░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝\t░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝\n";
+}
+
+void GameView::displayGameWon() const {
+    std::cout << "\n\n";
+    std::cout << "██╗░░░██╗░█████╗░██╗░░░██╗\t░██╗░░░░░░░██╗██╗███╗░░██╗\t██╗\n";
+    std::cout << "╚██╗░██╔╝██╔══██╗██║░░░██║\t░██║░░██╗░░██║██║████╗░██║\t██║\n";
+    std::cout << "░╚████╔╝░██║░░██║██║░░░██║\t░╚██╗████╗██╔╝██║██╔██╗██║\t██║\n";
+    std::cout << "░░╚██╔╝░░██║░░██║██║░░░██║\t░░████╔═████║░██║██║╚████║\t╚═╝\n";
+    std::cout << "░░░██║░░░╚█████╔╝╚██████╔╝\t░░╚██╔╝░╚██╔╝░██║██║░╚███║\t██╗\n";
+    std::cout << "░░░╚═╝░░░░╚════╝░░╚═════╝░\t░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝\t╚═╝\n";
 }
 // clang-format on
 
@@ -116,10 +126,14 @@ void GameView::displaySell() const {
     std::cout << "b. Go back (MERCHANT)\n";
 }
 
-void GameView::displayGameOver() const {
+void GameView::displayGameEnd() const {
     // std::cout << "YOU WENT BANKRUPT!\n";
 
-    displayEnd();
+    if(this->gameState == EnumGameState::WON){
+        displayGameWon();
+    } else {
+        displayGameOver();
+    }
 
     std::cout << "\n\n";
     //     "\n\nIn the realm we've traversed together, I've witnessed

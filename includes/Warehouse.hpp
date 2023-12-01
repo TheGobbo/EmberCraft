@@ -28,6 +28,9 @@ class Warehouse {
     void addMaterial(Material* material);
     void addCrafted(Craft* crafted);
 
+    int countMythCrafs() const;
+    
+
    private:
     std::vector<Craft*> crafted;
     std::vector<Material*> materials;
