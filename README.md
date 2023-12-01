@@ -1,6 +1,20 @@
 # EmberCraft
 
-- [ ] create WareHouse screen to display current Smithy balance, Items and materials, here you can list or destroy them;
+Nota: 90
+
+> Correção:
+- Foco maior nos HPP, o UML foi visto só por cima
+- Programa foi avaliado/executado com valgrind, atenção com memory leaks
+- Orientação a Obj. deve permitir fácil modificações por quem quiser alterar o jogo, sem mexer no fonte (core)
+> Menções:
+- já existe libs para testes em c++, não precisava fazer na mão
+- destrutores não virtuais em algumas classes
+- Código dos materiais ficou mais voltado para C doq C++
+- MVC é um padrão meio ßø§ta
+
+---
+
+__The README bellow is outdated__
 
 MENU:
     1. Move to Merchant's Store
@@ -29,8 +43,6 @@ BUY (shows balance)
     a. merchant item a with price X
     b. merchant material b with price Y
     1. Go back (MERCHANT)
-
-
 
 MVC:
     M (chama func the materiais, banco, items, etc)
@@ -107,16 +119,16 @@ THE PROJECT NEEDS TO UTILIZE THE FOLLOWING FUNCTIONALITY FROM C++11
 
 - [x] Access modifiers public/private
 - [x] Constructors
-- [ ] Dynamic allocation with new/delete
+- [x] Dynamic allocation with new/delete
 - [x] This, references, and asserts
-- [ ] Standard Template Library (STL)
+- [x] Standard Template Library (STL)
 - [x] Forward declarations & friendship
 - [x] Static members
-- [ ] Destructors
+- [x] Destructors
 - [x] Const
 - [x] Parametric polymorphism <T>
-- [ ] Inheritance
-- [ ] Virtual functions
+- [x] Inheritance
+- [x] Virtual functions
 - [x] Namespaces
 
 ---
@@ -270,19 +282,3 @@ Systems: Crafting System/Trading System/Naming System
   - Needs to receive a request to remove/add material/items/coins from the stock
   - Anounce if the operation is a success or not to proceed with flow
   - provides a const list of items/materials for the other party to lookup
-
-REQUIREMENTS:
-
-- [ ] Modificadore de acesso public/private
-- [ ] Construtores
-- [ ] Alocação dinâmica com new/delete
-- [ ] This, referencias e asserts
-- [ ] STL
-- [ ] Forward declarations & friendship
-- [ ] Membros static
-- [ ] Destrutores
-- [ ] Const
-- [ ] Polimorfismo paramétrico \<T>
-- [ ] Herança
-- [ ] Funções virtuais
-- [ ]
